@@ -49,15 +49,14 @@ $result = $conn->query($sql);
 								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="ac'.$row["id"].'" id=""ac'.$row["id"].'" value="'.(float)$row["actual"].'"></td></tr>';
 							}
 						}
-						// $conn->close();?>
-						<tr>
-							<td colspan="3" class="text-right">
-								<input type="button" class="btn btn-primary" id="btn_q1" name="btn_q1" value="Update"></input>
-							</td>
-						</tr>
+						?>
 					</tbody>
 				</table>
-			</form>
+			</form>			
+			<div class="panel-footer">
+				<button type="button" class="btn btn-primary "id="btn_q1" style="float: right;">Update</button>
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -90,14 +89,13 @@ $result = $conn->query($sql);
 							}
 						}
 						// $conn->close();?>
-						<tr>
-							<td colspan="3" class="text-right">
-								<input type="button" class="btn btn-primary" id="btn_q1_w" name="btn_q1_w" value="Update"></input>
-							</td>
-						</tr>
 					</tbody>
 				</table>
-			</form>
+			</form>			
+			<div class="panel-footer">
+				<button type="button" class="btn btn-primary "id="btn_q1_w" style="float: right;">Update</button>
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -131,14 +129,13 @@ $result = $conn->query($sql);
 							}
 						}
 						// $conn->close();?>
-						<tr>
-							<td colspan="3" class="text-right">
-								<input type="button" class="btn btn-primary" id="btn_pareto" name="btn_pareto" value="Update"></input>
-							</td>
-						</tr>
 					</tbody>
 				</table>
-			</form>
+			</form>			
+			<div class="panel-footer">
+				<button type="button" class="btn btn-primary "id="btn_pareto" style="float: right;">Update</button>
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -195,15 +192,14 @@ $result = $conn->query($sql);
 							}
 							echo '<input class="form-control text-center" type="hidden" name="counter_q3" id="counter_q3" value="'.$c.'">';
 						}
-						// $conn->close();?>
-						<tr>
-							<td colspan="6" class="text-right">
-								<input type="button" class="btn btn-primary" id="btn_q3" name="btn_q3" value="Update"></input>
-							</td>
-						</tr>
+						?>
 					</tbody>
 				</table>
-			</form>
+			</form>			
+			<div class="panel-footer">
+				<button type="button" class="btn btn-primary "id="btn_q3" style="float: right;">Update</button>
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -266,21 +262,17 @@ $result = $conn->query($sql);
 							echo '<input class="form-control text-center" type="hidden" name="counter_q4" id="counter_q4" value="'.$c.'">';
 						}
 						$conn->close();?>
-						<!-- <tr>
-							<td colspan="15" class="text-right">
-								<button type="button" id="tambahBtn" class="btn btn-default btn-font-blue" ><i class="fa fa-fw fa-plus"></i>Add Row</button>
-								<input type="button" class="btn btn-primary" id="btn_q4" name="btn_q4" value="Update"></input>
-							</td>
-						</tr> -->
 					</tbody>
 				</table>
-				<button type="button" id="tambahBtn" class="btn btn-default btn-font-blue text-right" ><i class="fa fa-fw fa-plus"></i>Add Row</button>
-				<button type="button" class="btn btn-primary text-right" id="btn_q4" >Update</button>
 			</form>
+			<div class="panel-footer">
+				<button type="button" class="btn btn-primary "id="btn_q4" style="float: right;">Update</button>
+				<button type="button" id="tambahBtn" class="btn btn-default btn-font-blue" style="float: right;">Add Row</button>
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 </div>
-
 
     <!-- jQuery 2.1.4 -->
     <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
