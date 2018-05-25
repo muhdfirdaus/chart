@@ -241,7 +241,7 @@ $result = $conn->query($sql);
 							while($row = $result->fetch_assoc()) {
 								$c++;
 								echo '<tr>
-								<td class="text-center">'.$row["no"].'
+								<td class="text-center"><input type="button" value="Delete" onclick="deleteRow(this)"></input>
 								<input class="form-control text-center" type="hidden" name="rid'.$c.'" id="rid'.$c.'" value="'.$row["id"].'"></td>
 								<td class="text-center"><input class="form-control text-center" max="100" type="text" name="model'.$c.'" id="model'.$c.'" value="'.$row["model"].'" required></td>
 								<td class="text-center"><textarea class="form-control" style="resize:none" name="remark'.$c.'" id="remark'.$c.'"  cols="50" rows="2" required>'.$row["remark"].'</textarea></td>
@@ -267,7 +267,7 @@ $result = $conn->query($sql);
 			</form>
 			<div class="panel-footer">
 				<button type="button" class="btn btn-primary "id="btn_q4" style="float: right;">Update</button>
-				<!-- <button type="button" id="tambahBtn" class="btn btn-default btn-font-blue" style="float: right;">Add Row</button> -->
+				<button type="button" id="tambahBtn" class="btn btn-default btn-font-blue" style="float: right;">Add Row</button>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -290,7 +290,16 @@ $result = $conn->query($sql);
     <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script>
+	function deleteRow(btn) {
+		// console.log("hahaha");
+		// alert("HERE!");
+		var row = btn.parentNode.parentNode;
+		row.parentNode.removeChild(row);
+	}
+
 	$(function () {
+
+		
 
 		$("#form_q1").keypress(function(e) {
 			//Enter key
@@ -368,7 +377,7 @@ $result = $conn->query($sql);
 		function getValue() {
 
 			var tableData = "";
-			$('#tableq4 tbody').append('<tr><td class="text-center">9<input class="form-control text-center" type="hidden" name="rid9" id="rid9" value="9"></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="model9" id="model9" value="9" required></td><td class="text-center"><textarea class="form-control" style="resize:none" name="remark9" id="remark9"  cols="50" rows="2" required>9</textarea></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jan9" id="jan9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="feb9" id="feb9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="mar9" id="mar9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="apr9" id="apr9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="may9" id="may9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jun9" id="jun9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jul9" id="jul9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="aug9" id="aug9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="sep9" id="sep9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="oct9" id="oct9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="nov9" id="nov9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="dec9" id="dec9" value=""></td></tr>');
+			$('#tableq4 tbody').append('<tr><td class="text-center"><input type="button" value="Delete" onclick="deleteRow(this)"></input><input class="form-control text-center" type="hidden" name="rid9" id="rid9" value="9"></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="model9" id="model9" value="9" required></td><td class="text-center"><textarea class="form-control" style="resize:none" name="remark9" id="remark9"  cols="50" rows="2" required>9</textarea></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jan9" id="jan9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="feb9" id="feb9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="mar9" id="mar9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="apr9" id="apr9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="may9" id="may9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jun9" id="jun9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jul9" id="jul9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="aug9" id="aug9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="sep9" id="sep9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="oct9" id="oct9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="nov9" id="nov9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="dec9" id="dec9" value=""></td></tr>');
 			
 			// $('#tableq4 tbody').append('<tr id='+rowNum+'>');
 					
