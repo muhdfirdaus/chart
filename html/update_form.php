@@ -141,7 +141,7 @@ $result = $conn->query($sql);
 </div>
 
 <?php
-$sql = "SELECT id, no, failure, act, pic, week, status FROM q3 order by no";
+$sql = "SELECT id, no, failure, act, pic, week, status FROM q3 order by id";
 $result = $conn->query($sql);
 ?>
 
@@ -205,7 +205,7 @@ $result = $conn->query($sql);
 </div>
 
 <?php
-$sql = "SELECT *  FROM q4 order by no";
+$sql = "SELECT *  FROM q4 order by id";
 $result = $conn->query($sql);
 ?>
 
@@ -218,7 +218,7 @@ $result = $conn->query($sql);
 			<form action="update_q4.php" method="post" name="form_q4" id="form_q4">
 				<table class="table table-bordered table-striped" id="tableq4">
 					<thead>
-						<th class="info text-center">NO.</th>
+						<th class="info text-center">No</th>
 						<th class="info text-center">Model</th>
 						<th class="info text-center">Remark</th>
 						<th class="info text-center">Jan</th>
@@ -267,7 +267,7 @@ $result = $conn->query($sql);
 			</form>
 			<div class="panel-footer">
 				<button type="button" class="btn btn-primary "id="btn_q4" style="float: right;">Update</button>
-				<button type="button" id="tambahBtn" class="btn btn-default btn-font-blue" style="float: right;">Add Row</button>
+				<!-- <button type="button" id="tambahBtn" class="btn btn-default btn-font-blue" style="float: right;">Add Row</button> -->
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -332,31 +332,31 @@ $result = $conn->query($sql);
 
 
 		$("#btn_q4").click(function () {
-			var msg = 'Please insert value for:';
-			var tot = $("#counter_q4").val();
-			var msgAppear = false;
-			for(var i=1; i<= tot; i++) {
-				var rem = "remark" + i;
-				var model = "model" + i;
-				var valrem = document.getElementById(rem).value;
-				var valmod = document.getElementById(model).value;
+			// var msg = 'Please insert value for:';
+			// var tot = $("#counter_q4").val();
+			// var msgAppear = false;
+			// for(var i=1; i<= tot; i++) {
+			// 	var rem = "remark" + i;
+			// 	var model = "model" + i;
+			// 	var valrem = document.getElementById(rem).value;
+			// 	var valmod = document.getElementById(model).value;
 				
-				if(valrem.trim() == "" ) {
-					msg = msg + "\n - Remark (Line:" + i +")";
-					msgAppear = true;
-				}
-				else if(valmod.trim() == "" ){
-					msg = msg + "\n - Model (Line:" + i +")";
-					msgAppear = true;
-				}
+			// 	if(valrem.trim() == "" ) {
+			// 		msg = msg + "\n - Remark (Line:" + i +")";
+			// 		msgAppear = true;
+			// 	}
+			// 	else if(valmod.trim() == "" ){
+			// 		msg = msg + "\n - Model (Line:" + i +")";
+			// 		msgAppear = true;
+			// 	}
 				
-			}
-			if(msgAppear){
-				alert(msg);
-			}
-			else{
+			// }
+			// if(msgAppear){
+			// 	alert(msg);
+			// }
+			// else{
 				document.getElementById("form_q4").submit();
-			}
+			// }
 		});
 		
 		function isNumber(n) {
