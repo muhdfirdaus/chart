@@ -1,5 +1,5 @@
 <?php
-include('dist/includes/dbcon.php');
+include('../dist/includes/dbcon.php');
 $counter = 0;
 for($i=1; $i<=5; $i++){
     $sql = "UPDATE q1_weekly SET forecast=".$_POST["fc$i"].", actual=".$_POST["ac$i"]." WHERE id=$i";

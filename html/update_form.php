@@ -5,19 +5,19 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <!-- <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css"> -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
             folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 </head>
-<?php include('dist/includes/dbcon.php'); ?>
+<?php include('../dist/includes/dbcon.php'); ?>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">
-		Beyonics<small class="small-title"><a href="index.php">OTD Achievement - Update</a></small>
+		Beyonics<small class="small-title"><a href="../index.php">OTD Achievement - Update</a></small>
 		</h1>
 	</div>
 </div>
@@ -266,14 +266,16 @@ $result = $conn->query($sql);
 							echo '<input class="form-control text-center" type="hidden" name="counter_q4" id="counter_q4" value="'.$c.'">';
 						}
 						$conn->close();?>
-						<tr>
+						<!-- <tr>
 							<td colspan="15" class="text-right">
 								<button type="button" id="tambahBtn" class="btn btn-default btn-font-blue" ><i class="fa fa-fw fa-plus"></i>Add Row</button>
 								<input type="button" class="btn btn-primary" id="btn_q4" name="btn_q4" value="Update"></input>
 							</td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
+				<button type="button" id="tambahBtn" class="btn btn-default btn-font-blue text-right" ><i class="fa fa-fw fa-plus"></i>Add Row</button>
+				<button type="button" class="btn btn-primary text-right" id="btn_q4" >Update</button>
 			</form>
 		</div>
 	</div>
@@ -281,19 +283,19 @@ $result = $conn->query($sql);
 
 
     <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
     <!-- SlimScroll -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
-    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <script src="../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js"></script>
+    <script src="../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="../dist/js/demo.js"></script>
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script>
 	$(function () {
@@ -373,187 +375,13 @@ $result = $conn->query($sql);
 
 		function getValue() {
 
-			$("#kadp_baru").hide();
-			$("#lain").hide();
-			$(".original").show();
-			$('.original').val('');
-
-			var values = {};
-					var tableData = "";
-
-					$.each($("#carian-form-id").serializeArray(), function (i, field) {
-						values[field.name] = field.value;
-					});
-
-					var getValue = function (valueName) {
-						return values[valueName];
-					};
-
-					var select_jenis = $('input[name=jenis_hakmilik]:checked').val();
-
-					if(select_jenis == "dhm"){
-						carian = "Hakmilik";
-					}else if(select_jenis == "dhm_strata"){
-						carian = "Hakmilik Strata";
-					}else if(select_jenis == "lot"){
-						carian = "Lot"
-					}else if(select_jenis == "lot_strata"){
-						carian = "Lot Strata"
-					}else if(getValue("jenis_kp") > 0 || getValue("kp1") != '' || getValue("kp2") != '' || getValue("kp3") != '' || getValue("no_pengenalan") != '' || getValue("pengenalan_daerah") > 0){
-						carian = "Maklumat Pengenalan";
-					}else{
-						carian = "Invalid";
-						alert("Amaran! Anda tidak mengisi borang carian lagi");
-					}
-
-					if(getValue("jenis_terimaan") != null){
-						terimaan = getValue("jenis_terimaan");
-						tableData += '<b>Jenis Terimaan: </b>'+terimaan+'<input type="hidden" name="terimaan['+rowNum+']" value="'+terimaan+'" />'+'<input type="hidden" name="rowForLoop['+rowNum+']" value="'+rowNum+'" />';
-					}
-
-					if(getValue("dhm_daerah") > 0){
-						daerah = getValue("dhm_daerah");
-						tableData += '<b> Daerah: </b>'+daerah+'<input type="hidden" name="daerah['+rowNum+']" value="'+daerah+'" />';
-					}else if(getValue("lot_daerah") > 0){
-						daerah = getValue("lot_daerah");
-						tableData += '<b> Daerah: </b>'+daerah+'<input type="hidden" name="daerah['+rowNum+']" value="'+daerah+'" />';
-					}else if(getValue("pengenalan_daerah") > 0){
-						daerah = getValue("pengenalan_daerah");
-					}else{
-						daerah = " - ";
-						tableData += '<b> Daerah: </b>'+daerah;
-					}
-
-					if(getValue("dhm_mukim") > 0){
-						mukim = getValue("dhm_mukim");
-						tableData += '<b> Mukim: </b>'+mukim+'<input type="hidden" name="mukim['+rowNum+']" value="'+mukim+'" />';
-					}else if(getValue("lot_mukim") > 0){
-						mukim = getValue("lot_mukim");
-						tableData += '<b> Mukim: </b>'+mukim+'<input type="hidden" name="mukim['+rowNum+']" value="'+mukim+'" />';
-					}else{
-						mukim = " - ";
-						tableData += '<b> Mukim: </b>'+mukim;
-					}
-
-					if(getValue("dhm_jenis") > 0){
-						jenisDhm = getValue("dhm_jenis");
-						tableData += '<b> Jenis: </b>'+jenisDhm+'<input type="hidden" name="jenisDhm['+rowNum+']" value="'+jenisDhm+'" />';
-					}else if(getValue("lot_jenis") > 0){
-						jenisLot = getValue("lot_jenis");
-						tableData += '<b> Jenis: </b>'+jenisLot+'<input type="hidden" name="jenisLot['+rowNum+']" value="'+jenisLot+'" />';
-					}else{
-						jenis = " - ";
-						tableData += '<b> Jenis: </b>'+jenis;
-					}
-
-					if(getValue("dhm_dari") > 0){
-						dariDhm = getValue("dhm_dari");
-						tableData += '<b> No. (Dari): </b>'+dariDhm+'<input type="hidden" name="dariDhm['+rowNum+']" value="'+dariDhm+'" />';
-					}else if(getValue("lot_dari") > 0){
-						dariLot = getValue("lot_dari");
-						tableData += '<b> No. (Dari): </b>'+dariLot+'<input type="hidden" name="dariLot['+rowNum+']" value="'+dariLot+'" />';
-					}else{
-						dari = " - ";
-						tableData += '<b> No. (Dari): </b>'+dari;
-					}
-
-					if(getValue("dhm_hingga") > 0){
-						hinggaDhm = getValue("dhm_hingga");
-						tableData += '<b> No. (Hingga): </b>'+hinggaDhm+'<input type="hidden" name="hinggaDhm['+rowNum+']" value="'+hinggaDhm+'" />';
-					}else if(getValue("lot_hingga") > 0){
-						hinggaLot = getValue("lot_hingga");
-						tableData += '<b> No. (Hingga): </b>'+hinggaLot+'<input type="hidden" name="hinggaLot['+rowNum+']" value="'+hinggaLot+'" />';
-					}else{
-						hingga = " - ";
-						tableData += '<b> No. (Hingga): </b>'+hingga;
-					}
-
-					//strata
-					if($("#dhm_bangunan_nama").val() != ""){
-						noBangunan = $("#dhm_bangunan_nama").val();
-						tableData += '<b> No Bangunan: </b>'+noBangunan+'<input type="hidden" name="noBangunan['+rowNum+']" value="'+noBangunan+'" />';
-					}else if($("#lot_bangunan_nama").val() != ""){
-						noBangunan = $("#lot_bangunan_nama").val();
-						tableData += '<b> No Bangunan: </b>'+noBangunan+'<input type="hidden" name="noBangunan['+rowNum+']" value="'+noBangunan+'" />';
-					} else{
-						noBangunan = "-";
-						tableData += '<b> No Bangunan: </b>'+noBangunan;
-					}
-
-					if($("#dhm_tingkat").val() != ""){
-						noTingkat = $("#dhm_tingkat").val();
-						tableData += '<b> No Tingkat: </b>'+noTingkat+'<input type="hidden" name="noTingkat['+rowNum+']" value="'+noTingkat+'" />';
-					}else if($("#lot_tingkat").val() != ""){
-						noTingkat = $("#lot_tingkat").val();
-						tableData += '<b> No Tingkat: </b>'+noTingkat+'<input type="hidden" name="noTingkat['+rowNum+']" value="'+noTingkat+'" />';
-					} else{
-						noTingkat = "-";
-						tableData += '<b> No Tingkat: </b>'+noTingkat;
-					}
-
-					if($("#petak_dhm_dari").val() != ""){
-						noPetakDari = $("#petak_dhm_dari").val();
-						tableData += '<b> No Petak Dari: </b>'+noPetakDari+'<input type="hidden" name="noPetakDari['+rowNum+']" value="'+noPetakDari+'" />';
-					}else if($("#petak_lot_dari").val() != ""){
-						noPetakDari = $("#petak_lot_dari").val();
-						tableData += '<b> No Petak Dari: </b>'+noPetakDari+'<input type="hidden" name="noPetakDari['+rowNum+']" value="'+noPetakDari+'" />';
-					} else{
-						noPetakDari = "-";
-						tableData += '<b> No Petak Dari: </b>'+noPetakDari;
-					}
-
-					if($("#petak_dhm_hingga").val() != ""){
-						noPetakHingga = $("#petak_dhm_hingga").val();
-						tableData += '<b> No Petak Hingga: </b>'+noPetakHingga+'<input type="hidden" name="noPetakHingga['+rowNum+']" value="'+noPetakHingga+'" />';
-					}else if($("#petak_lot_hingga").val() != ""){
-						noPetakHingga = $("#petak_lot_hingga").val() != "";
-						tableData += '<b> No Petak Hingga: </b>'+noPetakHingga+'<input type="hidden" name="noPetakHingga['+rowNum+']" value="'+noPetakHingga+'" />';
-					} else{
-						noPetakHingga = "-";
-						tableData += '<b> No Petak Hingga: </b>'+noPetakHingga;
-					}
-					// end strata
-
-						noic = "";
-						if(getValue("jenis_kp") > 0 || getValue("kp1") != '' || getValue("kp2") != '' || getValue("kp3") != '' || getValue("no_pengenalan") != '' || getValue("pengenalan_daerah") > 0){
-						if(getValue("kp1") != '' || getValue("kp2") != '' || getValue("kp3") != ''){
-						noic = getValue("kp1") + getValue("kp2") + getValue("kp3");
-						}
-						if (getValue("no_pengenalan") != ''){
-						noic = getValue("no_pengenalan");
-						}
-
-						jenisPengenalan = getValue("jenis_kp");
-						jenisPengenalanView = $("#jenis_kp option:selected").text();
-
-						if(getValue("pengenalan_daerah") > 0){
-							pengenalan_daerah = getValue("pengenalan_daerah");
-							tableData = '<b> Daerah: </b>'+pengenalan_daerah+'<input type="hidden" name="daerahPengenalan['+rowNum+']" value="'+pengenalan_daerah+'" />';
-						} else {
-							pengenalan_daerah = " - ";
-							tableData = '<b> Daerah: </b>'+hingga;
-						}
-
-						$('#tableq4 tbody').append('<tr id='+rowNum+'><td><input type="hidden" name="rowForLoopPengenalan['+rowNum+']" value="'+rowNum+'" />'+rowNum+'</td><td>'+carian+'</td><td><b>Jenis Terimaan: </b>'+terimaan+'<input type="hidden" name="terimaan['+rowNum+']" value="'+terimaan+'" /><b> Jenis Maklumat Pengenalan: </b>'+jenisPengenalanView+'<input type="hidden" name="jenisPengenalan['+rowNum+']" value="'+jenisPengenalan+'" /><b> No. Pengenalan: </b>'+noic+'<input type="hidden" name="noic['+rowNum+']" value="'+noic+'" />'+tableData+'</td><td><button type="button" id="deleteBtn" class="btn btn-danger removebutton" >Padam</button></td></tr>');
-					}else if(getValue("dhm_daerah") > 0 || getValue("dhm_mukim") > 0 || getValue("dhm_jenis") > 0 || getValue("dhm_dari") > 0 || getValue("dhm_hingga") > 0 || getValue("lot_daerah") > 0 || getValue("lot_mukim") > 0 || getValue("lot_lain") > 0 || getValue("lot_dari") > 0 || getValue("lot_hingga") > 0){
-						$('#tableq4 tbody').append('<tr id='+rowNum+'><td><input type="hidden" name="rowForLoopHakmilik['+rowNum+']" value="'+rowNum+'" />'+rowNum+'</td><td>'+carian+'</td><td>'+tableData+'</td><td><button type="button" id="deleteBtn" class="btn btn-danger removebutton" >Padam</button></td></tr>');
-					}
-
-					$('#carian-form-id').trigger("reset");
-					checkMultiForm();
-					rowNum++;
-					$( "#dhm_daerah" ).focus();
-		}
-
-		function clearSelectize(){
-
-			var temp_selectizeArr = ['dhm_daerah','dhm_jenis','lot_daerah','lot_jenis','pengenalan_daerah'];
-			var imp, select, control;
-			for (imp = 0; imp < temp_selectizeArr.length; imp++) {
-				select = $('#'+temp_selectizeArr[imp]).selectize();
-				control = select[0].selectize;
-				control.clear(true);
-			}
+			var tableData = "";
+			$('#tableq4 tbody').append('<tr><td class="text-center">9<input class="form-control text-center" type="hidden" name="rid9" id="rid9" value="9"></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="model9" id="model9" value="9" required></td><td class="text-center"><textarea class="form-control" style="resize:none" name="remark9" id="remark9"  cols="50" rows="2" required>9</textarea></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jan9" id="jan9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="feb9" id="feb9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="mar9" id="mar9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="apr9" id="apr9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="may9" id="may9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jun9" id="jun9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jul9" id="jul9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="aug9" id="aug9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="sep9" id="sep9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="oct9" id="oct9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="nov9" id="nov9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="dec9" id="dec9" value=""></td></tr>');
+			
+			// $('#tableq4 tbody').append('<tr id='+rowNum+'>');
+					
+			// rowNum++;
+			// $( "#dhm_daerah" ).focus();
 		}
 	});
 </script>

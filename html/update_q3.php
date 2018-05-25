@@ -1,5 +1,5 @@
 <?php
-include('dist/includes/dbcon.php');
+include('../dist/includes/dbcon.php');
 
 $total = $_POST["counter_q3"];
 $counter =0;

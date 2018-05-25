@@ -26,7 +26,7 @@ include('dist/includes/dbcon.php');?>
     </div>
     <p class="navbar-brand">&nbsp;OTD ACHIEVEMENT | MATERIAL</p>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="update_form.php">Update</a></li>
+      <li><a href="html/update_form.php">Update</a></li>
       <!-- <li><a href="#">&nbsp;</a></li>
       <li><a href="#">&nbsp;</a></li>
       <li><a href="#">OTD ACHIEVEMENT | MATERIAL</a></li> -->
