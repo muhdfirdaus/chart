@@ -296,6 +296,8 @@ $result = $conn->query($sql);
 	function deleteRow(btn, ci, c) {
 		// console.log("hahaha");
 		// alert(ci + "->>" + c);
+		// var row = btn.parentNode.parentNode;
+		// row.parentNode.removeChild(row);
 		if(ci != "n"){
 			asal = $("#to_del").val();
 			baru = asal + ci +",";
@@ -322,13 +324,9 @@ $result = $conn->query($sql);
 		}
 		$("#counter_q4").val(ct_asal-1);
 		document.getElementById("tableq4").deleteRow(-1);
-		// var row = btn.parentNode.parentNode;
-		// row.parentNode.removeChild(row);
 	}
 
 	$(function () {
-
-
 
 		$("#form_q1").keypress(function(e) {
 			//Enter key
@@ -370,44 +368,46 @@ $result = $conn->query($sql);
 
 
 		$("#btn_q4").click(function () {
-			// var msg = 'Please insert value for:';
-			// var tot = $("#counter_q4").val();
-			// var msgAppear = false;
-			// for(var i=1; i<= tot; i++) {
-			// 	var rem = "remark" + i;
-			// 	var model = "model" + i;
-			// 	var valrem = document.getElementById(rem).value;
-			// 	var valmod = document.getElementById(model).value;
+			var msg = 'Please insert value for:';
+			var tot = $("#counter_q4").val();
+			var msgAppear = false;
+			for(var i=1; i<= tot; i++) {
+				var rem = "remark" + i;
+				var model = "model" + i;
+				var valrem = document.getElementById(rem).value;
+				var valmod = document.getElementById(model).value;
 				
-			// 	if(valrem.trim() == "" ) {
-			// 		msg = msg + "\n - Remark (Line:" + i +")";
-			// 		msgAppear = true;
-			// 	}
-			// 	else if(valmod.trim() == "" ){
-			// 		msg = msg + "\n - Model (Line:" + i +")";
-			// 		msgAppear = true;
-			// 	}
+				if(valrem.trim() == "" ) {
+					msg = msg + "\n - Remark (Line:" + i +")";
+					msgAppear = true;
+				}
+				else if(valmod.trim() == "" ){
+					msg = msg + "\n - Model (Line:" + i +")";
+					msgAppear = true;
+				}
 				
-			// }
-			// if(msgAppear){
-			// 	alert(msg);
-			// }
-			// else{
+			}
+			if(msgAppear){
+				alert(msg);
+			}
+			else{
 				document.getElementById("form_q4").submit();
-			// }
+			}
 		});
 		
 		function isNumber(n) {
 			return !isNaN(parseFloat(n)) && isFinite(n);
 		}
-		$("#tambahBtn").on("click", getValue);
+		
+		$("#tambahBtn").on("click", addRow);
 
 
-		function getValue() {
+		function addRow() {
 
-			var tableData = "";
-			$('#tableq4 tbody').append('<tr><td class="text-center"><input type="button" value="Delete" onclick="deleteRow(this)"></input><input class="form-control text-center" type="hidden" name="rid9" id="rid9" value="9"></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="model9" id="model9" value="9" required></td><td class="text-center"><textarea class="form-control" style="resize:none" name="remark9" id="remark9"  cols="50" rows="2" required>9</textarea></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jan9" id="jan9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="feb9" id="feb9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="mar9" id="mar9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="apr9" id="apr9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="may9" id="may9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jun9" id="jun9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jul9" id="jul9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="aug9" id="aug9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="sep9" id="sep9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="oct9" id="oct9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="nov9" id="nov9" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="dec9" id="dec9" value=""></td></tr>');
-			
+			ct = $("#counter_q4").val();
+			ct2 = ct+1;
+			$('#tableq4 tbody').append('<tr><td class="text-center"><input type="button" value="Delete" onclick="deleteRow(this, "n", '+ct2+')"></input><input class="form-control text-center" type="hidden" name="rid'+ct2+'" id="rid'+ct2+'" value="new"></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="model'+ct2+'" id="model'+ct2+'" value="" required></td><td class="text-center"><textarea class="form-control" style="resize:none" name="remark'+ct2+'" id="remark'+ct2+'"  cols="50" rows="2" required></textarea></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jan'+ct2+'" id="jan'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="feb'+ct2+'" id="feb'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="mar'+ct2+'" id="mar'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="apr'+ct2+'" id="apr'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="may'+ct2+'" id="may'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jun'+ct2+'" id="jun'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jul'+ct2+'" id="jul'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="aug'+ct2+'" id="aug'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="sep'+ct2+'" id="sep'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="oct'+ct2+'" id="oct'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="nov'+ct2+'" id="nov'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="dec'+ct2+'" id="dec'+ct2+'" value=""></td></tr>');
+			$("#counter_q4").val(ct+1);
 			// $('#tableq4 tbody').append('<tr id='+rowNum+'>');
 					
 			// rowNum++;

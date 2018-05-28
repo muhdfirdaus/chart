@@ -25,13 +25,20 @@ for($i=1; $i<=$total; $i++){
     isset($_POST["nov$i"])?$nov = $_POST["nov$i"]: $nov = "NULL";
     isset($_POST["dece$i"])?$dec = $_POST["dece$i"]: $dec = "NULL";
 
-    $sql = "UPDATE q4 SET jan='".$jan."', feb='".$feb."',
-    mar='".$mar."', apr='".$apr."',
-    may='".$may."', jun='".$jun."',
-    jul='".$jul."', aug='".$aug."',
-    sep='".$sep."', oct='".$oct."',
-    nov='".$nov."', dece='".$dec."', 
-    remark='".$_POST["remark$i"]."', model='".$_POST["model$i"]."' WHERE id=".$_POST["rid$i"]."";
+    if($_POST["rid$i"]=="new"){
+        $sql = "INSERT INTO q4 (model, remark, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dece)
+                values ('".$_POST["model$i"]."','".$_POST["remark$i"]."', '".$jan."', '".$feb."','".$mar."', '".$apr."', '".$may."', '".$jun."', '".$jul."', '".$aug."','".$sep."', '".$oct."', '".$nov."', '".$dec."')";
+    }
+    else{
+        $sql = "UPDATE q4 SET jan='".$jan."', feb='".$feb."',
+                mar='".$mar."', apr='".$apr."',
+                may='".$may."', jun='".$jun."',
+                jul='".$jul."', aug='".$aug."',
+                sep='".$sep."', oct='".$oct."',
+                nov='".$nov."', dece='".$dec."', 
+                remark='".$_POST["remark$i"]."', model='".$_POST["model$i"]."' WHERE id=".$_POST["rid$i"]."";
+    }
+    
     // echo($sql."and the counter=".$counter." and the total=".$total."<br>");
     // $counter++;
     if ($conn->query($sql) === TRUE) {
