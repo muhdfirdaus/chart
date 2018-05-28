@@ -21,7 +21,7 @@
 		</h1>
 	</div>
 </div>
-
+<body onload="document.refresh();">
 <?php
 $sql = "SELECT id, month, forecast, actual FROM q1";
 $result = $conn->query($sql);
@@ -291,7 +291,7 @@ $result = $conn->query($sql);
     <script src="../dist/js/demo.js"></script>
     <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
-
+</body>
 <script>
 	function deleteRow(btn, ci, c) {
 		// console.log("hahaha");
@@ -307,9 +307,21 @@ $result = $conn->query($sql);
 			$("#rid"+i).val($("#rid"+n).val());
 			$("#remark"+i).val($("#remark"+n).val());
 			$("#model"+i).val($("#model"+n).val());
+			$("#jan"+i).val($("#jan"+n).val());
+			$("#feb"+i).val($("#feb"+n).val());
+			$("#mar"+i).val($("#mar"+n).val());
+			$("#apr"+i).val($("#apr"+n).val());
+			$("#may"+i).val($("#may"+n).val());
+			$("#jun"+i).val($("#jun"+n).val());
+			$("#jul"+i).val($("#jul"+n).val());
+			$("#aug"+i).val($("#aug"+n).val());
+			$("#sep"+i).val($("#sep"+n).val());
+			$("#oct"+i).val($("#oct"+n).val());
+			$("#nov"+i).val($("#nov"+n).val());
+			$("#dece"+i).val($("#dece"+n).val());
 		}
-		ct_asal = $("#counter_q4").val();
 		$("#counter_q4").val(ct_asal-1);
+		document.getElementById("tableq4").deleteRow(-1);
 		// var row = btn.parentNode.parentNode;
 		// row.parentNode.removeChild(row);
 	}

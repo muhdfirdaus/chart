@@ -3,6 +3,13 @@ include('../dist/includes/dbcon.php');
 
 $total = $_POST["counter_q4"];
 $counter = 0;
+$to_del = rtrim($_POST["to_del"],",");
+$sql = "DELETE from q4 where id in ($to_del)";
+if ($conn->query($sql) === TRUE) {
+    //
+} else {
+    echo  "Error deleting record: " . $conn->error ."<br>";
+}
 for($i=1; $i<=$total; $i++){
 
     isset($_POST["jan$i"])?$jan = $_POST["jan$i"]: $jan="NULL";
@@ -37,7 +44,7 @@ $conn->close();
 if($counter==$total){
     echo'<script type="text/javascript">
 	alert("Record updated successfully");
-	window.history.back();
+	window.location = document.referrer;;
 	</script>';
 }
 
