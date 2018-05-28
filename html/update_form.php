@@ -296,7 +296,20 @@ $result = $conn->query($sql);
 	function deleteRow(btn, ci, c) {
 		// console.log("hahaha");
 		// alert(ci + "->>" + c);
-		alert($("#form_q1").val());
+		if(ci != "n"){
+			asal = $("#to_del").val();
+			baru = asal + ci +",";
+			$("#to_del").val(baru);
+		}
+		ct_asal = $("#counter_q4").val();
+		for(i = c; i < ct_asal; i++){
+			n = i+1;
+			$("#rid"+i).val($("#rid"+n).val());
+			$("#remark"+i).val($("#remark"+n).val());
+			$("#model"+i).val($("#model"+n).val());
+		}
+		ct_asal = $("#counter_q4").val();
+		$("#counter_q4").val(ct_asal-1);
 		// var row = btn.parentNode.parentNode;
 		// row.parentNode.removeChild(row);
 	}
