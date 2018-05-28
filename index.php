@@ -10,11 +10,18 @@ include('dist/includes/dbcon.php');?>
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <!-- <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css"> -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
-            folder instead of downloading all of them to reduce the load. -->
+        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+    <link rel='stylesheet prefetch' href='http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css'>
 </head>
 
 <!-- <nav class="navbar navbar-inverse"> -->
@@ -424,5 +431,19 @@ if ($result->num_rows > 0) {
                 }
             });
         </script>
+        <!-- jQuery 2.1.4 -->
+        <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="../plugins/fastclick/fastclick.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../dist/js/app.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../dist/js/demo.js"></script>
+        <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
     </div>
 

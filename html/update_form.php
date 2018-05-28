@@ -240,8 +240,10 @@ $result = $conn->query($sql);
 							$c = 0;	//counter initiator 
 							while($row = $result->fetch_assoc()) {
 								$c++;
+								$ci = $row["id"];
+								// '.$row["no"].'
 								echo '<tr>
-								<td class="text-center"><input type="button" value="Delete" onclick="deleteRow(this)"></input>
+								<td class="text-center"><input type="button" value="Delete" onclick="deleteRow(this, '.$ci.', '.$c.')"></input>
 								<input class="form-control text-center" type="hidden" name="rid'.$c.'" id="rid'.$c.'" value="'.$row["id"].'"></td>
 								<td class="text-center"><input class="form-control text-center" max="100" type="text" name="model'.$c.'" id="model'.$c.'" value="'.$row["model"].'" required></td>
 								<td class="text-center"><textarea class="form-control" style="resize:none" name="remark'.$c.'" id="remark'.$c.'"  cols="50" rows="2" required>'.$row["remark"].'</textarea></td>
@@ -259,7 +261,8 @@ $result = $conn->query($sql);
 								<td class="text-center"><input class="form-control text-center" max="100" type="text" name="dece'.$c.'" id="dece'.$c.'" value="'.$row["dece"].'"></td>
 								</tr>';
 							}
-							echo '<input class="form-control text-center" type="hidden" name="counter_q4" id="counter_q4" value="'.$c.'">';
+							echo '<input class="form-control text-center" type="hidden" name="counter_q4" id="counter_q4" value="'.$c.'">
+							<input class="form-control text-center" type="hidden" name="to_del" id="to_del" value="">';
 						}
 						$conn->close();?>
 					</tbody>
@@ -290,21 +293,22 @@ $result = $conn->query($sql);
     <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script>
-	function deleteRow(btn) {
+	function deleteRow(btn, ci, c) {
 		// console.log("hahaha");
-		// alert("HERE!");
-		var row = btn.parentNode.parentNode;
-		row.parentNode.removeChild(row);
+		// alert(ci + "->>" + c);
+		alert($("#form_q1").val());
+		// var row = btn.parentNode.parentNode;
+		// row.parentNode.removeChild(row);
 	}
 
 	$(function () {
 
-		
+
 
 		$("#form_q1").keypress(function(e) {
 			//Enter key
 			if (e.which == 13) {
-			return false;
+			return false;con.quer()
 			}
 		});
 

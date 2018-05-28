@@ -2,7 +2,7 @@
 include('../dist/includes/dbcon.php');
 $counter = 0;
 for($i=1; $i<=5; $i++){
-    $sql = "UPDATE pareto SET acc=".$_POST["fc$i"].", qty=".$_POST["ac$i"]." WHERE id=$i";
+    $sql = "UPDATE pareto SET acc=".$_POST["fc$i"].", qty=".$_POST["ac$i"].", problem='".$_POST["prob$i"]."' WHERE id=$i";
     if ($conn->query($sql) === TRUE) {
         $counter += 1;
     } else {
