@@ -51,7 +51,7 @@ $conn->close();
 if($counter==$total){
     echo'<script type="text/javascript">
 	alert("Record updated successfully");
-	window.location = document.referrer;;
+	window.location = document.referrer;
 	</script>';
 }
 

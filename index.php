@@ -84,7 +84,7 @@ include('dist/includes/dbcon.php');?>
     <!-- </div>
     <div class="container" > -->
     <?php
-    $sql = "SELECT id, no, failure, act, pic, week, status FROM q3 order by no";
+    $sql = "SELECT id, failure, act, pic, week, status FROM q3 order by id";
     $result = $conn->query($sql);
     ?>
         <div style="float:left;width:50%;margin-left:5px;"  class="row">

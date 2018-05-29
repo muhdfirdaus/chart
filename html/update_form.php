@@ -21,7 +21,7 @@
 		</h1>
 	</div>
 </div>
-<body onload="document.refresh();">
+<body >
 <?php
 $sql = "SELECT id, month, forecast, actual FROM q1";
 $result = $conn->query($sql);
@@ -45,8 +45,8 @@ $result = $conn->query($sql);
 							// output data of each row
 							while($row = $result->fetch_assoc()) {
 								echo '<tr><td class="text-center">'.$row["month"].'</td>
-								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="fc'.$row["id"].'" id=""fc'.$row["id"].'" value="'.(float)$row["forecast"].'"></td>
-								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="ac'.$row["id"].'" id=""ac'.$row["id"].'" value="'.(float)$row["actual"].'"></td></tr>';
+								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="fc'.$row["id"].'" id="fc'.$row["id"].'" value="'.(float)$row["forecast"].'"></td>
+								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="ac'.$row["id"].'" id="ac'.$row["id"].'" value="'.(float)$row["actual"].'"></td></tr>';
 							}
 						}
 						?>
@@ -84,8 +84,8 @@ $result = $conn->query($sql);
 							// output data of each row
 							while($row = $result->fetch_assoc()) {
 								echo '<tr><td class="text-center">'.$row["week"].'</td>
-								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="fc'.$row["id"].'" id=""fc'.$row["id"].'" value="'.(float)$row["forecast"].'"></td>
-								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="ac'.$row["id"].'" id=""ac'.$row["id"].'" value="'.(float)$row["actual"].'"></td></tr>';
+								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="fc'.$row["id"].'" id="fc'.$row["id"].'" value="'.(float)$row["forecast"].'"></td>
+								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="ac'.$row["id"].'" id="ac'.$row["id"].'" value="'.(float)$row["actual"].'"></td></tr>';
 							}
 						}
 						// $conn->close();?>
@@ -123,9 +123,9 @@ $result = $conn->query($sql);
 						<?php if ($result->num_rows > 0) {
 							// output data of each row
 							while($row = $result->fetch_assoc()) {
-								echo '<tr><td class="text-center"><input class="form-control text-center" max="100" type="text" name="prob'.$row["id"].'" id=""prob'.$row["id"].'" value="'.$row["problem"].'"></td>
-								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="fc'.$row["id"].'" id=""fc'.$row["id"].'" value="'.(float)$row["acc"].'"></td>
-								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="ac'.$row["id"].'" id=""ac'.$row["id"].'" value="'.(float)$row["qty"].'"></td></tr>';
+								echo '<tr><td class="text-center"><input class="form-control text-center" max="100" type="text" name="prob'.$row["id"].'" id="prob'.$row["id"].'" value="'.$row["problem"].'"></td>
+								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="fc'.$row["id"].'" id="fc'.$row["id"].'" value="'.(float)$row["acc"].'"></td>
+								<td class="text-center"><input class="form-control text-center" max="100" type="number" name="ac'.$row["id"].'" id="ac'.$row["id"].'" value="'.(float)$row["qty"].'"></td></tr>';
 							}
 						}
 						// $conn->close();?>
@@ -141,7 +141,7 @@ $result = $conn->query($sql);
 </div>
 
 <?php
-$sql = "SELECT id, no, failure, act, pic, week, status FROM q3 order by id";
+$sql = "SELECT id, failure, act, pic, week, status FROM q3 order by id";
 $result = $conn->query($sql);
 ?>
 
@@ -152,7 +152,7 @@ $result = $conn->query($sql);
 				<h3 class="panel-title">Q3 Table</h3>
 			</div>
 			<form action="update_q3.php" method="post" name="form_q3" id="form_q3">
-				<table class="table table-bordered table-striped">
+				<table class="table table-bordered table-striped" id="tableq3">
 					<thead>
 						<th class="info text-center col-lg-1">NO.</th>
 						<th class="info text-center">Failure</th>
@@ -167,12 +167,14 @@ $result = $conn->query($sql);
 							$c = 0;	//counter initiator
 							while($row = $result->fetch_assoc()) {
 								$c++;
-								echo '<tr><td class="text-center">'.$row["no"].'
-								<input class="form-control text-center" type="hidden" name="rid'.$c.'" id=""rid'.$c.'" value="'.$row["id"].'"></td>
-								<td class="text-center"><textarea class="form-control" style="resize:none" name="failure'.$c.'" id=""failure'.$c.'"  cols="40" rows="5">'.$row["failure"].'</textarea></td>
-								<td class="text-center"><textarea class="form-control" style="resize:none" name="act'.$c.'" id=""act'.$c.'"  cols="40" rows="5">'.$row["act"].'</textarea></td>
+								$ci = $row["id"];
+								echo '<tr>
+								<td class="text-center">'.$c.'<br><button type="button" class="btn btn-danger btn-xs" onclick="deleteRowQ3(this, '.$ci.', '.$c.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</button>
+								<input class="form-control text-center" type="hidden" name="rid'.$c.'" id="rid'.$c.'" value="'.$row["id"].'"></td>
+								<td class="text-center"><textarea class="form-control" style="resize:none" name="failure'.$c.'" id="failure'.$c.'"  cols="40" rows="5">'.$row["failure"].'</textarea></td>
+								<td class="text-center"><textarea class="form-control" style="resize:none" name="act'.$c.'" id="act'.$c.'"  cols="40" rows="5">'.$row["act"].'</textarea></td>
 								<td class="text-center">
-									<select class="form-control" name="week'.$c.'" id=""week'.$c.'">
+									<select class="form-control" name="week'.$c.'" id="week'.$c.'">
 										<option value="-" '.(($row["week"]=="-")?'selected ="selected"':'').'>-</option>
 										<option value="W1" '.(($row["week"]=="W1")?'selected ="selected"':'').'>W1</option>
 										<option value="W2" '.(($row["week"]=="W2")?'selected ="selected"':'').'>W2</option>
@@ -181,16 +183,18 @@ $result = $conn->query($sql);
 										<option value="W5" '.(($row["week"]=="W5")?'selected ="selected"':'').'>W5</option>
 									</select>
 								</td>
-								<td class="text-center"><input class="form-control text-center" max="100" type="text" name="pic'.$c.'" id=""pic'.$c.'" value="'.$row["pic"].'"></td>
+								<td class="text-center"><input class="form-control text-center" max="100" type="text" name="pic'.$c.'" id="pic'.$c.'" value="'.$row["pic"].'"></td>
 								<td class="text-center">
-									<select class="form-control" name="status'.$c.'" id=""status'.$c.'">
+									<select class="form-control" name="status'.$c.'" id="status'.$c.'">
 										<option value="-" '.(($row["status"]=="-")?'selected ="selected"':'').'>-</option>
 										<option value="OPEN" '.(($row["status"]=="OPEN")?'selected ="selected"':'').'>OPEN</option>
 										<option value="CLOSE" '.(($row["status"]=="CLOSE")?'selected ="selected"':'').'><p style="color:red">CLOSE</p></option>
 									</select>
-								</td></tr>';
+								</td>
+								</tr>';
 							}
-							echo '<input class="form-control text-center" type="hidden" name="counter_q3" id="counter_q3" value="'.$c.'">';
+							echo '<input class="form-control text-center" type="hidden" name="counter_q3" id="counter_q3" value="'.$c.'">
+							<input class="form-control text-center" type="hidden" name="to_delq3" id="to_delq3" value="">';
 						}
 						?>
 					</tbody>
@@ -198,6 +202,7 @@ $result = $conn->query($sql);
 			</form>			
 			<div class="panel-footer">
 				<button type="button" class="btn btn-primary "id="btn_q3" style="float: right;">Update</button>
+				<button type="button" id="tambahBtnQ3" class="btn btn-default btn-font-blue" style="float: right;">Add Row</button>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -241,7 +246,6 @@ $result = $conn->query($sql);
 							while($row = $result->fetch_assoc()) {
 								$c++;
 								$ci = $row["id"];
-								// '.$row["no"].'
 								echo '<tr>
 								<td class="text-center">'.$c.'<button type="button" class="btn btn-danger btn-xs" onclick="deleteRow(this, '.$ci.', '.$c.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</button>
 								<input class="form-control text-center" type="hidden" name="rid'.$c.'" id="rid'.$c.'" value="'.$row["id"].'"></td>
@@ -294,10 +298,6 @@ $result = $conn->query($sql);
 </body>
 <script>
 	function deleteRow(btn, ci, c) {
-		// console.log("hahaha");
-		// alert(ci + "->>" + c);
-		// var row = btn.parentNode.parentNode;
-		// row.parentNode.removeChild(row);
 
 		if(ci != 1.1){
 			asal = $("#to_del").val();
@@ -325,6 +325,25 @@ $result = $conn->query($sql);
 		}
 		$("#counter_q4").val(ct_asal-1);
 		document.getElementById("tableq4").deleteRow(-1);
+	}
+	function deleteRowQ3(btn, ci, c) {
+		if(ci != 1.1){
+			asal = $("#to_delq3").val();
+			baru = asal + ci +",";
+			$("#to_delq3").val(baru);
+		}
+		ct_asal = $("#counter_q3").val();
+		for(i = c; i < ct_asal; i++){
+			n = i+1;
+			$("#rid"+i).val($("#rid"+n).val());
+			$("#failure"+i).val($("#failure"+n).val());
+			$("#act"+i).val($("#act"+n).val());
+			$("#week"+i).val($("#week"+n).val());
+			$("#pic"+i).val($("#pic"+n).val());
+			$("#status"+i).val($("#status"+n).val());
+		}
+		$("#counter_q3").val(ct_asal-1);
+		document.getElementById("tableq3").deleteRow(-1);
 	}
 
 	$(function () {
@@ -401,7 +420,7 @@ $result = $conn->query($sql);
 		}
 		
 		$("#tambahBtn").on("click", addRow);
-
+		$("#tambahBtnQ3").on("click", addRowQ3);
 
 		function addRow() {
 
@@ -410,10 +429,16 @@ $result = $conn->query($sql);
 			c = 1.1;
 			$('#tableq4 tbody').append('<tr><td class="text-center">'+ct2+'<button type="button" class="btn btn-danger btn-xs" onclick="deleteRow(this, '+c+', '+ct2+')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</button><input class="form-control text-center" type="hidden" name="rid'+ct2+'" id="rid'+ct2+'" value="new"></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="model'+ct2+'" id="model'+ct2+'" value="" required></td><td class="text-center"><textarea class="form-control" style="resize:none" name="remark'+ct2+'" id="remark'+ct2+'"  cols="50" rows="2" required></textarea></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jan'+ct2+'" id="jan'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="feb'+ct2+'" id="feb'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="mar'+ct2+'" id="mar'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="apr'+ct2+'" id="apr'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="may'+ct2+'" id="may'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jun'+ct2+'" id="jun'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jul'+ct2+'" id="jul'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="aug'+ct2+'" id="aug'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="sep'+ct2+'" id="sep'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="oct'+ct2+'" id="oct'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="nov'+ct2+'" id="nov'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="dec'+ct2+'" id="dec'+ct2+'" value=""></td></tr>');
 			$("#counter_q4").val(ct+1);
-			// $('#tableq4 tbody').append('<tr id='+rowNum+'>');
-					
-			// rowNum++;
-			// $( "#dhm_daerah" ).focus();
+		}
+
+		function addRowQ3() {
+			ct = Number($("#counter_q3").val());
+			ct2 = ct+1;
+			c = 1.1;//alert("ct>"+ct+"///c>"+c+"///ct2>"+ct2);
+			// // $('#tableq3 tbody').append('<tr><td class="text-center">'+ct2+'<button type="button" class="btn btn-danger btn-xs" onclick="deleteRow(this, '+c+', '+ct2+')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</button><input class="form-control text-center" type="hidden" name="rid'+ct2+'" id="rid'+ct2+'" value="new"></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="model'+ct2+'" id="model'+ct2+'" value="" required></td><td class="text-center"><textarea class="form-control" style="resize:none" name="remark'+ct2+'" id="remark'+ct2+'"  cols="50" rows="2" required></textarea></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jan'+ct2+'" id="jan'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="feb'+ct2+'" id="feb'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="mar'+ct2+'" id="mar'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="apr'+ct2+'" id="apr'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="may'+ct2+'" id="may'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jun'+ct2+'" id="jun'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="jul'+ct2+'" id="jul'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="aug'+ct2+'" id="aug'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="sep'+ct2+'" id="sep'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="oct'+ct2+'" id="oct'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="nov'+ct2+'" id="nov'+ct2+'" value=""></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="dec'+ct2+'" id="dec'+ct2+'" value=""></td></tr>');
+			$('#tableq3 tbody').append('<tr><td class="text-center">'+ct2+'<br><button type="button" class="btn btn-danger btn-xs" onclick="deleteRowQ3(this, '+c+', '+ct2+')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</button><input class="form-control text-center" type="hidden" name="rid'+ct2+'" id="rid'+c+'" value="new"></td><td class="text-center"><textarea class="form-control" style="resize:none" name="failure'+ct2+'" id="failure'+ct2+'"  cols="40" rows="5"></textarea></td><td class="text-center"><textarea class="form-control" style="resize:none" name="act'+ct2+'" id="act'+ct2+'"  cols="40" rows="5"></textarea></td><td class="text-center"><select class="form-control" name="week'+ct2+'" id="week'+ct2+'"><option value="-"  selected>-</option><option value="W1">W1</option><option value="W2">W2</option><option value="W3">W3</option><option value="W4">W4</option><option value="W5">W5</option></select></td><td class="text-center"><input class="form-control text-center" max="100" type="text" name="pic'+ct2+'" id="pic'+ct2+'" ></td><td class="text-center"><select class="form-control" name="status'+ct2+'" id="status'+ct2+'"><option value="-" selected>-</option><option value="OPEN" >OPEN</option><option value="CLOSE"><p style="color:red">CLOSE</p></option></select></td></tr>');
+			// $('#tableq3 tbody').append('<tr><td colspan=6>hahaha'+ct2+'</td></tr>');
+			$("#counter_q3").val(ct2);
 		}
 	});
 </script>
