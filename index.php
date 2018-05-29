@@ -104,9 +104,11 @@ include('dist/includes/dbcon.php');?>
                             </thead>
                             <tbody style="font-size:90%;">
                                 <?php if ($result->num_rows > 0) {
+                                    $c = 0;
                                     // output data of each row
                                     while($row = $result->fetch_assoc()) {
-                                        echo '<tr><td class="text-center">'.$row["no"].'</td>
+                                        $c++;
+                                        echo '<tr><td class="text-center">'.$c.'</td>
                                         <td class="text-left">'.$row["failure"].'</td>
                                         <td class="text-left">'.$row["act"].'</td>
                                         <td class="text-center">'.$row["week"].'</td>
@@ -122,7 +124,7 @@ include('dist/includes/dbcon.php');?>
         </div><!-- /.row -->
 
         <?php
-        $sql = "SELECT *  FROM q4 order by no";
+        $sql = "SELECT *  FROM q4 order by id";
         $result = $conn->query($sql);
         ?>                               
         <div style="float:right;width:50%;margin-right:5px;" class="row">
@@ -151,10 +153,12 @@ include('dist/includes/dbcon.php');?>
                             </thead>
                             <tbody style="font-size:90%;">
                                 <?php if ($result->num_rows > 0) {
+                                    $c = 0;
                                     // output data of each row
                                     while($row = $result->fetch_assoc()) {
+                                        $c++;
                                         echo '<tr>
-                                        <td class="text-center">'.$row["no"].'</td>
+                                        <td class="text-center">'.$c.'</td>
                                         <td class="text-center">'.$row["model"].'</td>
                                         <td class="text-center">'.$row["remark"].'</td>
                                         <td class="text-center">'.$row["jan"].'</td>

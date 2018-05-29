@@ -12,18 +12,18 @@ if ($conn->query($sql) === TRUE) {
 }
 for($i=1; $i<=$total; $i++){
 
-    isset($_POST["jan$i"])?$jan = $_POST["jan$i"]: $jan="NULL";
-    isset($_POST["feb$i"])?$feb = $_POST["feb$i"]: $feb = "NULL";
-    isset($_POST["mar$i"])?$mar = $_POST["mar$i"]: $mar = "NULL";
-    isset($_POST["apr$i"])?$apr = $_POST["apr$i"]: $apr = "NULL";
-    isset($_POST["may$i"])?$may = $_POST["may$i"]: $may = "NULL";
-    isset($_POST["jun$i"])?$jun = $_POST["jun$i"]: $jun = "NULL";
-    isset($_POST["jul$i"])?$jul = $_POST["jul$i"]: $jul = "NULL";
-    isset($_POST["aug$i"])?$aug = $_POST["aug$i"]: $aug = "NULL";
-    isset($_POST["sep$i"])?$sep = $_POST["sep$i"]: $sep = "NULL";
-    isset($_POST["oct$i"])?$oct = $_POST["oct$i"]: $oct = "NULL";
-    isset($_POST["nov$i"])?$nov = $_POST["nov$i"]: $nov = "NULL";
-    isset($_POST["dece$i"])?$dec = $_POST["dece$i"]: $dec = "NULL";
+    isset($_POST["jan$i"])?$jan = $_POST["jan$i"]: $jan= "";
+    isset($_POST["feb$i"])?$feb = $_POST["feb$i"]: $feb = "";
+    isset($_POST["mar$i"])?$mar = $_POST["mar$i"]: $mar = "";
+    isset($_POST["apr$i"])?$apr = $_POST["apr$i"]: $apr = "";
+    isset($_POST["may$i"])?$may = $_POST["may$i"]: $may = "";
+    isset($_POST["jun$i"])?$jun = $_POST["jun$i"]: $jun = "";
+    isset($_POST["jul$i"])?$jul = $_POST["jul$i"]: $jul = "";
+    isset($_POST["aug$i"])?$aug = $_POST["aug$i"]: $aug = "";
+    isset($_POST["sep$i"])?$sep = $_POST["sep$i"]: $sep = "";
+    isset($_POST["oct$i"])?$oct = $_POST["oct$i"]: $oct = "";
+    isset($_POST["nov$i"])?$nov = $_POST["nov$i"]: $nov = "";
+    isset($_POST["dece$i"])?$dec = $_POST["dece$i"]: $dec = "";
 
     if($_POST["rid$i"]=="new"){
         $sql = "INSERT INTO q4 (model, remark, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dece)
