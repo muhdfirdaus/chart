@@ -84,24 +84,42 @@ include('dist/includes/dbcon.php');?>
     <!-- </div>
     <div class="container" > -->
     <?php
-    $sql = "SELECT id, failure, act, pic, week, status FROM q3 order by id";
+    isset($_GET['status'])?$status = $_GET['status'] : $status= '-';
+    if($status == '-'){
+        $sql = "SELECT id, failure, act, pic, week, status FROM q3 order by id";
+    }
+    else{
+        $sql = "SELECT id, failure, act, pic, week, status FROM q3 where status='$status' order by id";
+    }
     $result = $conn->query($sql);
     ?>
-        <div style="float:left;width:50%;margin-left:5px;"  class="row">
+        <div style="float:left;width:50%;margin-left:5px;"  class="row" id='q3'>
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Q3</h3>
                     </div>
                         <table  class="table table-striped table-bordered table-condensed">
-                            <thead style="font-size:90%;">
+                            <!-- <thead style="font-size:90%;"> -->
+                            <tr>
+                                <td colspan=4></td>
+                                <td colspan=2 style="border:0;">
+                                    <select class="form-control" name="status" id="status">
+                                        <option value="-" <?php if($status=='-'){echo 'selected';} ?>>-</option>
+                                        <option value="OPEN" <?php if($status=='OPEN'){echo 'selected';} ?>>OPEN</option>
+                                        <option value="CLOSE" <?php if($status=='CLOSE'){echo 'selected';} ?>>CLOSE</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th class="info text-center">No</th>
                                 <th class="info text-center">Failure</th>
                                 <th class="info text-center">Update&Action</th>
                                 <th class="info text-center">Week</th>
                                 <th class="info text-center">PIC</th>
                                 <th class="info text-center">Status</th>
-                            </thead>
+                            </tr>
+                            <!-- </thead> -->
                             <tbody style="font-size:90%;">
                                 <?php if ($result->num_rows > 0) {
                                     $c = 0;
@@ -115,6 +133,8 @@ include('dist/includes/dbcon.php');?>
                                         <td class="text-center">'.$row["pic"].'</td>
                                         <td class="text-center">'.$row["status"].'</td></tr>';
                                     }
+                                }else{
+                                    echo'<tr><td colspan=6>No data to be shown.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -124,7 +144,7 @@ include('dist/includes/dbcon.php');?>
         </div><!-- /.row -->
 
         <?php
-        $sql = "SELECT *  FROM q4 order by id";
+        $sql = "SELECT *  FROM q4_copy order by id";
         $result = $conn->query($sql);
         ?>                               
         <div style="float:right;width:50%;margin-right:5px;" class="row">
@@ -134,7 +154,7 @@ include('dist/includes/dbcon.php');?>
                         <h3 class="panel-title">Q4</h3>
                     </div>
                         <table class="table table-striped table-bordered table-condensed">
-                            <thead style="font-size:90%;">
+                            <tr>
                                 <th class="info text-center">No</th>
                                 <th class="info text-center">Model</th>
                                 <th class="info text-center">Remark</th>
@@ -150,7 +170,7 @@ include('dist/includes/dbcon.php');?>
                                 <th class="info text-center">Oct</th>
                                 <th class="info text-center">Nov</th>
                                 <th class="info text-center">Dec</th>
-                            </thead>
+                            <tr>
                             <tbody style="font-size:90%;">
                                 <?php if ($result->num_rows > 0) {
                                     $c = 0;
@@ -175,6 +195,8 @@ include('dist/includes/dbcon.php');?>
                                         <td class="text-center">'.$row["dece"].'</td>
                                         </tr>';
                                     }
+                                }else{
+                                    echo'<tr><td colspan=15>No data to be shown.</td></tr>';
                                 }//$conn->close();?>
                             </tbody>
                         </table>
@@ -449,5 +471,21 @@ if ($result->num_rows > 0) {
         <script src="../dist/js/demo.js"></script>
         <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+        $(function () {
+            $('#status').on('change',function(){
+                status = $("#status").val();
+                if(status != "-" )
+                {
+                endext = "?status=" + status + "#q3";
+                }
+                else
+                {
+                endext = "?status=-#q3";
+                }
+                window.location.href = (endext);
+            });
+        });
+        </script>
     </div>
 
