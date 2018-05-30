@@ -105,7 +105,7 @@ include('dist/includes/dbcon.php');?>
                                 <td colspan=4></td>
                                 <td colspan=2 style="border:0;">
                                     <select class="form-control" name="status" id="status">
-                                        <option value="-" <?php if($status=='-'){echo 'selected';} ?>>-</option>
+                                        <option value="-" <?php if($status=='-'){echo 'selected';} ?>>ALL</option>
                                         <option value="OPEN" <?php if($status=='OPEN'){echo 'selected';} ?>>OPEN</option>
                                         <option value="CLOSE" <?php if($status=='CLOSE'){echo 'selected';} ?>>CLOSE</option>
                                     </select>
@@ -144,7 +144,7 @@ include('dist/includes/dbcon.php');?>
         </div><!-- /.row -->
 
         <?php
-        $sql = "SELECT *  FROM q4_copy order by id";
+        $sql = "SELECT *  FROM q4 order by id";
         $result = $conn->query($sql);
         ?>                               
         <div style="float:right;width:50%;margin-right:5px;" class="row">
