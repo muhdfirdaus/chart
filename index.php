@@ -82,17 +82,52 @@ include('dist/includes/dbcon.php');?>
         <br><br>
 
     <!-- </div>
-    <div class="container" > -->
+    <div class="container" > --> 
     <?php
     isset($_GET['status'])?$status = $_GET['status'] : $status= '-';
-    if($status == '-'){
+	
+	isset($_GET['week'])?$week = $_GET['week'] : $week= '-';
+	
+    if($status == '-' && $week == '-'){
         $sql = "SELECT id, failure, act, pic, week, status FROM q3 order by id";
     }
+	else if($status != '-' && $week == '-'){
+		$sql = "SELECT id, failure, act, pic, week, status FROM q3 where status='$status' order by id";
+	}
+	else if($week != '-' && $status =='-'){
+		$sql = "SELECT id, failure, act, pic, week, status FROM q3 where week='$week' order by id";
+	}	
     else{
-        $sql = "SELECT id, failure, act, pic, week, status FROM q3 where status='$status' order by id";
+        $sql = "SELECT id, failure, act, pic, week, status FROM q3 where status='$status' and week='$week' order by id";
     }
+	
     $result = $conn->query($sql);
     ?>
+		<div style="display:flex;">
+		
+			<div style="float:left;width:7%;margin-left:455px;">
+				<form name="dropdown_week" method="post" action="">
+					<select class="form-control" name="week" id="week">
+						<option value="-" <?php if($week=='-'){echo 'selected';} ?>>ALL</option>
+						<option value="W1" <?php if($week=='W1'){echo 'selected';} ?>>W1</option>
+						<option value="W2" <?php if($week=='W2'){echo 'selected';} ?>>W2</option>
+						<option value="W3" <?php if($week=='W3'){echo 'selected';} ?>>W3</option>
+						<option value="W4" <?php if($week=='W4'){echo 'selected';} ?>>W4</option>
+						<option value="W5" <?php if($week=='W5'){echo 'selected';} ?>>W5</option>
+					</select> 
+				</form>
+			</div>		
+		
+				<div style="float:left;width:7%;margin-left:20px;">
+					<form name="dropdown_status" method="post" action="">           
+						<select class="form-control" name="status" id="status">
+							<option value="-" <?php if($status=='-'){echo 'selected';} ?>>ALL</option>
+							<option value="OPEN" <?php if($status=='OPEN'){echo 'selected';} ?>>OPEN</option>
+							<option value="CLOSE" <?php if($status=='CLOSE'){echo 'selected';} ?>>CLOSE</option>
+						</select>
+				</div>
+		</div>
+		
         <div style="float:left;width:50%;margin-left:5px;"  class="row" id='q3'>
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -101,16 +136,7 @@ include('dist/includes/dbcon.php');?>
                     </div>
                         <table  class="table table-striped table-bordered table-condensed">
                             <!-- <thead style="font-size:90%;"> -->
-                            <tr>
-                                <td colspan=4></td>
-                                <td colspan=2 style="border:0;">
-                                    <select class="form-control" name="status" id="status">
-                                        <option value="-" <?php if($status=='-'){echo 'selected';} ?>>ALL</option>
-                                        <option value="OPEN" <?php if($status=='OPEN'){echo 'selected';} ?>>OPEN</option>
-                                        <option value="CLOSE" <?php if($status=='CLOSE'){echo 'selected';} ?>>CLOSE</option>
-                                    </select>
-                                </td>
-                            </tr>
+
                             <tr>
                                 <th class="info text-center">No</th>
                                 <th class="info text-center">Failure</th>
@@ -472,16 +498,34 @@ if ($result->num_rows > 0) {
         <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>
-        $(function () {
-            $('#status').on('change',function(){
+		
+		$(function () {
+            $('#week').on('change',function(){
+                week = $("#week").val();
                 status = $("#status").val();
-                if(status != "-" )
+                if(week != "-" )
                 {
-                endext = "?status=" + status + "#q3";
+                endext = "?week=" + week + "&status=" + status +"#q3";
                 }
                 else
                 {
-                endext = "?status=-#q3";
+                endext = "?week=-&status=" + status +"#q3";
+                }
+                window.location.href = (endext);
+            });
+        });
+		
+        $(function () {
+            $('#status').on('change',function(){
+                week = $("#week").val();
+                status = $("#status").val();
+                if(status != "-" )
+                {
+                endext = "?week=" + week + "&status=" + status +"#q3";
+                }
+                else
+                {
+                endext = "?week=" + week + "&status=-#q3";
                 }
                 window.location.href = (endext);
             });
