@@ -7,17 +7,21 @@ include('dist/includes/dbcon.php');?>
     <title>Beyonics | OTD Achievement</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    
     <!-- Bootstrap 3.3.5 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
         folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
@@ -26,21 +30,69 @@ include('dist/includes/dbcon.php');?>
 
 <!-- <nav class="navbar navbar-inverse"> -->
 <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
-<nav class="navbar navbar-expand-lg navbar-inverse bg-light">
+
+<!-- <nav class="navbar navbar-expand-lg navbar-inverse bg-light">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#"><img src="dist/img/bey_logo.png" alt="Beyonics" height="30" width="92"></a>
     </div>
     <p class="navbar-brand">&nbsp;OTD ACHIEVEMENT | MATERIAL</p>
+    
     <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </li>
       <li><a href="html/update_form.php">Update</a></li>
-      <!-- <li><a href="#">&nbsp;</a></li>
-      <li><a href="#">&nbsp;</a></li>
-      <li><a href="#">OTD ACHIEVEMENT | MATERIAL</a></li> -->
     </ul>
   </div>
-</nav>
+</nav> -->
 
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Beyonics</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OTD ACHIEVEMENT | MATERIAL<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">OTD ACHIEVEMENT | MATERIAL 1</a></li>
+            <li><a href="#">OTD ACHIEVEMENT | MATERIAL 2</a></li>
+            <li><a href="#">OTD ACHIEVEMENT | MATERIAL 3</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="html/update_form.php">Update</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
 
 
@@ -493,10 +545,9 @@ if ($result->num_rows > 0) {
         <script src="../plugins/fastclick/fastclick.min.js"></script>
         <!-- AdminLTE App -->
         <script src="../dist/js/app.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../dist/js/demo.js"></script>
-        <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+
+
         <script>
 		
 		$(function () {
@@ -529,6 +580,10 @@ if ($result->num_rows > 0) {
                 }
                 window.location.href = (endext);
             });
+        });
+
+        $(document).ready(function() {
+            $(".dropdown-toggle").dropdown();
         });
         </script>
     </div>
